@@ -203,6 +203,7 @@ public class PacientesServiceImpl implements PacientesService {
             }
 
             errores.append(validarNombre(paciente.getNombre()));
+            errores.append(validarLongitudMinimaNombre(paciente.getNombre()));
             errores.append(validarTipoSangre(paciente.getTipoSangre()));
             errores.append(validarEdad(paciente.getEdad()));
             errores.append(validarPeso(paciente.getPeso()));
@@ -233,6 +234,19 @@ public class PacientesServiceImpl implements PacientesService {
         }
 
         return errores.toString();
+    }
+    
+    private String validarLongitudMinimaNombre(String nombre) {
+
+        if (nombre == null || nombre.trim().isEmpty()) {
+            return "";
+        }
+
+        if (nombre.trim().length() < 3) {
+            return "El nombre debe tener al menos 3 caracteres. ";
+        }
+
+        return "";
     }
 
     private String validarTipoSangre(String tipoSangre) {
